@@ -7,22 +7,14 @@ function getRandomNumber() {
 }
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
-app.get("/person", (req, res) => {
-  res.send(names[getRandomNumber()]);
-});
-
-app.get("/action", (req, res) => {
-  res.send(actions[getRandomNumber()]);
-});
-
-app.get("/objective", (req, res) => {
-  res.send(topics[getRandomNumber()]);
-});
+app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send({
+  res.json({
     person: names[getRandomNumber()],
     action: actions[getRandomNumber()],
     objective: topics[getRandomNumber()],
